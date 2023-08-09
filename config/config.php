@@ -17,9 +17,18 @@ $sql=mysqli_query($mysqli,"SELECT DISTINCT name FROM avto1");
 $sql2=mysqli_query($mysqli,"SELECT *  FROM avto1 LIMIT 5 ");
 $result2 = mysqli_fetch_all($sql2, MYSQLI_ASSOC);
 
-$sql3=mysqli_query($mysqli," SELECT DATE(date) AS date_day, AVG(price) AS avg_price, name, art, category, countdown, id
+$sql3=mysqli_query($mysqli,"SELECT
+    DATE(date) AS date_day,
+    AVG(price) AS avg_price,
+    (SELECT AVG(avg_price) FROM (
+                                    SELECT AVG(price) AS avg_price
+                                    FROM avto1
+                                    WHERE name = 'VAG 04E-109119F'
+                                    GROUP BY DATE(date)
+                                ) AS subquery) AS overall_avg_price
 FROM avto1
-WHERE name = 'VAG 04E-109119F'");
+WHERE name = 'VAG 04E-109119F'
+GROUP BY DATE(date);");
 $result3 = mysqli_fetch_all($sql3, MYSQLI_ASSOC);
 
 

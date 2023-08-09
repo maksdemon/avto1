@@ -1,27 +1,19 @@
-var ctx = document.getElementById('myChart').getContext('2d');
-var myChart = new Chart(ctx, {
+// Получите данные из атрибутов data-*
+var canvas2 = document.getElementById('myChart2');
+var names2 = JSON.parse(canvas2.getAttribute('data-names'));
+var prices2 = JSON.parse(canvas2.getAttribute('data-prices'));
+
+// Создайте график
+var ctx2 = canvas2.getContext('2d');
+var myChart2 = new Chart(ctx2, {
     type: 'bar',
     data: {
-        labels: ['Hong Kong', 'Macau', 'Japan', 'Switzerland', 'Spain', 'Singapore'],
+        labels: names2,
         datasets: [{
-            label: 'Life expectancy',
-            data: [84.308, 84.188, 84.118, 83.706, 83.5, 83.468],
-            backgroundColor: [
-                'rgba(216, 27, 96, 0.6)',
-                'rgba(3, 169, 244, 0.6)',
-                'rgba(255, 152, 0, 0.6)',
-                'rgba(29, 233, 182, 0.6)',
-                'rgba(156, 39, 176, 0.6)',
-                'rgba(84, 110, 122, 0.6)'
-            ],
-            borderColor: [
-                'rgba(216, 27, 96, 1)',
-                'rgba(3, 169, 244, 1)',
-                'rgba(255, 152, 0, 1)',
-                'rgba(29, 233, 182, 1)',
-                'rgba(156, 39, 176, 1)',
-                'rgba(84, 110, 122, 1)'
-            ],
+            label: 'Цена',
+            data: prices2,
+            backgroundColor: 'rgba(75, 192, 192, 0.6)',
+            borderColor: 'rgba(75, 192, 192, 1)',
             borderWidth: 1
         }]
     },
@@ -31,7 +23,7 @@ var myChart = new Chart(ctx, {
         },
         title: {
             display: true,
-            text: 'Life Expectancy by Country',
+            text: 'Цена товаров',
             position: 'top',
             fontSize: 16,
             padding: 20
@@ -39,7 +31,69 @@ var myChart = new Chart(ctx, {
         scales: {
             yAxes: [{
                 ticks: {
-                    min: 75
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+
+// Создаем контекст для третьего графика
+var canvas3 = document.getElementById('myChart3');
+var avgPrices3 = JSON.parse(canvas3.getAttribute('data-prices3'));
+var avgDates3 = JSON.parse(canvas3.getAttribute('data-dates3'));
+
+// Преобразование дат в массив объектов Date
+avgDates3 = avgDates3.map(function(dateString) {
+    return new Date(dateString);
+});
+
+// Создание третьего графика
+// Получение данных для графика myChart3
+var canvas3 = document.getElementById('myChart3');
+var avgPrices3 = JSON.parse(canvas3.getAttribute('data-prices3'));
+var avgDates3 = JSON.parse(canvas3.getAttribute('data-dates3'));
+
+// Преобразование дат в массив объектов Date
+avgDates3 = avgDates3.map(function(dateString) {
+    return new Date(dateString);
+});
+
+// Создание третьего графика
+var ctx3 = canvas3.getContext('2d');
+var myChart3 = new Chart(ctx3, {
+    type: 'bar',
+    data: {
+        labels: avgDates3,
+        datasets: [{
+            label: 'Средняя цена',
+            data: avgPrices3,
+            backgroundColor: 'rgba(75, 192, 192, 0.6)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        legend: {
+            display: false
+        },
+        title: {
+            display: true,
+            text: 'Средняя цена товара со временем',
+            position: 'top',
+            fontSize: 16,
+            padding: 20
+        },
+        scales: {
+            xAxes: [{
+                type: 'time',
+                time: {
+                    unit: 'day'
+                }
+            }],
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
                 }
             }]
         }

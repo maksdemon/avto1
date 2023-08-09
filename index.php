@@ -1,7 +1,9 @@
 <?php
 require('config/config.php');
 require('template/odd.php');
-
+echo'<pre>';
+print_r($result3);
+echo '</pre>';
 
 ?>
 <!DOCTYPE html>
@@ -64,7 +66,17 @@ require('template/odd.php');
               <canvas id="myChart" width="600" height="400"></canvas>
           </div>
       </div>
-
+        <div class="container">
+            <canvas id="myChart2" width="600" height="400"
+                    data-names="<?php echo htmlspecialchars(json_encode(array_column($result2, 'name')), ENT_QUOTES, 'UTF-8'); ?>"
+                    data-prices="<?php echo htmlspecialchars(json_encode(array_column($result2, 'price')), ENT_QUOTES, 'UTF-8'); ?>"></canvas>
+        </div>
+        <div class="container">
+            <canvas id="myChart3" width="600" height="400"
+                    data-prices3="<?php echo htmlspecialchars(json_encode(array_column($result3, 'price')), ENT_QUOTES, 'UTF-8'); ?>"
+                    data-dates3="<?php echo htmlspecialchars(json_encode(array_column($result3, 'date')), ENT_QUOTES, 'UTF-8'); ?>"></canvas>
+        </div>
+    </div>
       <footer class="footer">
         <p>© Company 2017</p>
       </footer>

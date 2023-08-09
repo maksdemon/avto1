@@ -23,11 +23,11 @@ $sql3=mysqli_query($mysqli,"SELECT
     (SELECT AVG(avg_price) FROM (
                                     SELECT AVG(price) AS avg_price
                                     FROM avto1
-                                    WHERE name = 'VAG 04E-109119F'
+                                    WHERE name = 'VAG 04E-145299N'
                                     GROUP BY DATE(date)
                                 ) AS subquery) AS overall_avg_price
 FROM avto1
-WHERE name = 'VAG 04E-109119F'
+WHERE name = 'VAG 04E-145299N'
 GROUP BY DATE(date);");
 $result3 = mysqli_fetch_all($sql3, MYSQLI_ASSOC);
 

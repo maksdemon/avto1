@@ -10,8 +10,12 @@ if ($mysqli->connect_error) {
     echo 'Connection established';
 }
 
-$sql=mysqli_query($mysqli,"SELECT * FROM avto1");
-$result=mysqli_fetch_assoc($sql);
+$sql=mysqli_query($mysqli,"SELECT DISTINCT name FROM avto1");
+//$result=mysqli_fetch_assoc($sql);
+//$result=mysqli_fetch_all($sql);
+//print_r($result);
+
+
 $count = 0;
 if (!function_exists('mysqli_init') && !extension_loaded('mysqli')) {
     echo 'We don\'t have mysqli!!!';

@@ -19,11 +19,7 @@ $result2 = mysqli_fetch_all($sql2, MYSQLI_ASSOC);
 
 $sql3=mysqli_query($mysqli," SELECT DATE(date) AS date_day, AVG(price) AS avg_price, name, art, category, countdown, id
 FROM avto1
-WHERE name = 'VAG 04E-109119F'
-GROUP BY DATE(date_day), name, art, category, countdown, id;");
-
-
-
+WHERE name = 'VAG 04E-109119F'");
 $result3 = mysqli_fetch_all($sql3, MYSQLI_ASSOC);
 
 

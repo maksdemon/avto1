@@ -21,7 +21,6 @@ echo '</pre>';
     <link href="../../css/editor.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script id="chartjs-script" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
     <!-- Custom styles for this template -->
     <link href="narrow-jumbotron.css" rel="stylesheet">
   <script src="chrome-extension://bnfdmghkeppfadphbnkjcicejfepnbfe/spFormElementPrototypeEx.js" id="spHTMLFormElementPrototypeScript"></script></head>
@@ -73,8 +72,8 @@ echo '</pre>';
         </div>
         <div class="container">
             <canvas id="myChart3" width="600" height="400"
-                    data-prices3="<?php echo htmlspecialchars(json_encode(array_column($result3, 'price')), ENT_QUOTES, 'UTF-8'); ?>"
-                    data-dates3="<?php echo htmlspecialchars(json_encode(array_column($result3, 'date')), ENT_QUOTES, 'UTF-8'); ?>"></canvas>
+                    data-prices3="<?php echo htmlspecialchars(json_encode(array_column($result3, 'avg_price')), ENT_QUOTES, 'UTF-8'); ?>"
+                    data-dates3="<?php echo htmlspecialchars(json_encode(array_column($result3, 'date_day')), ENT_QUOTES, 'UTF-8'); ?>"></canvas>
         </div>
     </div>
       <footer class="footer">
@@ -82,6 +81,8 @@ echo '</pre>';
       </footer>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
-        <script src="script.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+
+    <script src="script.js"></script>
   </body>
 </html>

@@ -49,17 +49,6 @@ avgDates3 = avgDates3.map(function(dateString) {
 });
 
 // Создание третьего графика
-// Получение данных для графика myChart3
-var canvas3 = document.getElementById('myChart3');
-var avgPrices3 = JSON.parse(canvas3.getAttribute('data-prices3'));
-var avgDates3 = JSON.parse(canvas3.getAttribute('data-dates3'));
-
-// Преобразование дат в массив объектов Date
-avgDates3 = avgDates3.map(function(dateString) {
-    return new Date(dateString);
-});
-
-// Создание третьего графика
 var ctx3 = canvas3.getContext('2d');
 var myChart3 = new Chart(ctx3, {
     type: 'bar',

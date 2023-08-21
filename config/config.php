@@ -16,7 +16,7 @@ $sql=mysqli_query($mysqli,"SELECT DISTINCT name FROM avto1");
 //print_r($result);
 $sql2=mysqli_query($mysqli,"SELECT *  FROM avto1 LIMIT 5 ");
 $result2 = mysqli_fetch_all($sql2, MYSQLI_ASSOC);
-
+/*
 $sql3=mysqli_query($mysqli,"SELECT
     DATE(date) AS date_day,
     AVG(price) AS avg_price,
@@ -30,7 +30,27 @@ FROM avto1
 WHERE name = 'VAG 04E-145299N'
 GROUP BY DATE(date);");
 $result3 = mysqli_fetch_all($sql3, MYSQLI_ASSOC);
+*/
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $selectedName = $_POST["selectedName"];
 
+    // Здесь выполните ваш запрос с использованием $selectedName вместо жестко заданного значения 'VAG 04E-145299N'
+    $sql3 = mysqli_query($mysqli, "SELECT
+        DATE(date) AS date_day,
+        AVG(price) AS avg_price,
+        (SELECT AVG(avg_price) FROM (
+            SELECT AVG(price) AS avg_price
+            FROM avto1
+            WHERE name = '$selectedName'
+            GROUP BY DATE(date)
+        ) AS subquery) AS overall_avg_price
+    FROM avto1
+    WHERE name = '$selectedName'
+    GROUP BY DATE(date);");
+
+    $result3 = mysqli_fetch_all($sql3, MYSQLI_ASSOC);
+}
+?>
 
 $count = 0;
 if (!function_exists('mysqli_init') && !extension_loaded('mysqli')) {

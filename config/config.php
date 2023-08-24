@@ -19,7 +19,6 @@ $result2 = mysqli_fetch_all($sql2, MYSQLI_ASSOC);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $selectedName = $_POST["selectedName"];
-
     // Здесь выполните ваш запрос с использованием $selectedName вместо жестко заданного значения 'VAG 04E-145299N'
     $sql3 = mysqli_query($mysqli, "SELECT
         DATE(date) AS date_day,

@@ -18,62 +18,44 @@ $sql2=mysqli_query($mysqli,"SELECT *  FROM avto1 LIMIT 5 ");
 $result2 = mysqli_fetch_all($sql2, MYSQLI_ASSOC);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $selectedName = $_POST["selectedName"];
+    if (isset($_POST["selectedName"])) {
+        $selectedName = $_POST["selectedName"];
+        $sql3 = mysqli_query($mysqli, "SELECT
+            DATE(date) AS date_day,
+            AVG(price) AS avg_price,
+            (SELECT AVG(avg_price) FROM (
+                SELECT AVG(price) AS avg_price
+                FROM avto1
+                WHERE name = '$selectedName'
+                GROUP BY DATE(date)
+            ) AS subquery) AS overall_avg_price
+        FROM avto1
+        WHERE name = '$selectedName'
+        GROUP BY DATE(date);");
 
-    // Здесь выполните ваш запрос с использованием $selectedName вместо жестко заданного значения 'VAG 04E-145299N'
-    $sql3 = mysqli_query($mysqli, "SELECT
-        DATE(date) AS date_day,
-        AVG(price) AS avg_price,
-        (SELECT AVG(avg_price) FROM (
-            SELECT AVG(price) AS avg_price
-            FROM avto1
-            WHERE name = '$selectedName'
-            GROUP BY DATE(date)
-        ) AS subquery) AS overall_avg_price
-    FROM avto1
-    WHERE name = '$selectedName'
-    GROUP BY DATE(date);");
+        $result3 = mysqli_fetch_all($sql3, MYSQLI_ASSOC);
+    }
 
-    $result3 = mysqli_fetch_all($sql3, MYSQLI_ASSOC);
+    if (isset($_POST["selectedNamemin"])) {
+        $selectedNamemin = $_POST["selectedNamemin"];
+        $sql4 = mysqli_query($mysqli, "SELECT
+        MIN(price) AS min_price,
+        DATE(date) AS start_date
+    FROM
+        avto1
+    WHERE
+        name = '$selectedNamemin'
+    GROUP BY
+        FLOOR(DATEDIFF(date, (SELECT MIN(date) FROM avto1 WHERE name = '$selectedNamemin')) / 3)
+    ORDER BY
+        start_date;
+    ");
+
+        $result4 = mysqli_fetch_all($sql4, MYSQLI_ASSOC);
+    }
+
 }
+
+// Дальше можете использовать $result3 и $result4 для вывода данных в HTML или другие действия
+
 ?>
-
-$count = 0;
-if (!function_exists('mysqli_init') && !extension_loaded('mysqli')) {
-    echo 'We don\'t have mysqli!!!';
-} else {
-    echo 'Phew we have it!';
-}
-$result_array = array();
-$count1=0;
-while ($row = mysqli_fetch_assoc($sql)&& $count1=0) {
-    $result_array[] = $row;
-    $count1++;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-
-        // Create Connection
-    //$conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-    $conn = mysqli_connect('62.109.2.72', 'avtoparser', '7xXD2rN9i', 'avto1');
-    // Check Connection
-    if(mysqli_connect_errno()){
-        // Connection Failed
-        echo 'Failed to connect to MySQL '. mysqli_connect_errno();
-    }
-    else{
-        echo 'соединение установлено ';
-    }
-*/

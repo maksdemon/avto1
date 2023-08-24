@@ -14,22 +14,33 @@ $result2 = mysqli_fetch_all($sql2, MYSQLI_ASSOC);
 
 
 // Здесь выполните ваш запрос с использованием $selectedName вместо жестко заданного значения 'VAG 04E-145299N'
-    $sql3 = mysqli_query($mysqli, "SELECT
-    MIN(price) AS min_price,
-    DATE(date) AS start_date
-FROM
-    avto1
-WHERE
-    name = 'BREMBO P85126X'
-GROUP BY
-    FLOOR(DATEDIFF(date, (SELECT MIN(date) FROM avto1 WHERE name = 'BREMBO P85126X')) / 3)
-ORDER BY
-    start_date;
-");
 
-    $result3 = mysqli_fetch_all($sql3, MYSQLI_ASSOC);
 
-foreach ($result3 as $row) {
+
+$sql4 = mysqli_query($mysqli, "SELECT
+        MIN(price) AS min_price,
+        DATE(date) AS start_date
+    FROM
+        avto1
+    WHERE
+        name = 'BREMBO P85126X'
+    GROUP BY
+        FLOOR(DATEDIFF(date, (SELECT MIN(date) FROM avto1 WHERE name = 'BREMBO P85126X')) / 3)
+    ORDER BY
+        start_date;
+    ");
+
+
+
+
+
+
+
+
+
+    $result4 = mysqli_fetch_all($sql4, MYSQLI_ASSOC);
+
+foreach ($result4 as $row) {
     echo "Start Date: " . $row['start_date'] . ", Min Price: " . $row['min_price'] . "<br>";
 }
 

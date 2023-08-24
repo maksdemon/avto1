@@ -44,7 +44,7 @@ echo '</pre>';
         </nav>
         <h3 class="text-muted">Project name
             <form id="selectForm" method="post">
-                <select name="selectedName" id="selectedName">
+                <select name="selectedNamemin" id="selectedNamemin">
                     <?php while (($result = mysqli_fetch_assoc($sql)) && ($count < 10)): ?>
                         <option value="<?php echo $result['name']; ?>"><?php echo $result['name']; ?></option>
                         <?php $count++; ?>
@@ -65,13 +65,12 @@ echo '</pre>';
 
     </div>
     <div class="container">
-        <canvas id="myChart3" width="600" height="400"
-                data-prices3="<?php echo htmlspecialchars(json_encode(array_column($result3, 'avg_price')), ENT_QUOTES, 'UTF-8'); ?>"
-                data-dates3="<?php echo htmlspecialchars(json_encode(array_column($result3, 'date_day')), ENT_QUOTES, 'UTF-8'); ?>">
-
+        <canvas id="myChart4" width="600" height="400"
+                data-min-prices="<?php echo htmlspecialchars(json_encode(array_column($result4, 'min_price')), ENT_QUOTES, 'UTF-8'); ?>"
+                data-start-dates="<?php echo htmlspecialchars(json_encode(array_column($result4, 'start_date')), ENT_QUOTES, 'UTF-8'); ?>">
         </canvas>
     </div>
-    data-url="update_chart_data.php?name=<?php echo urlencode(isset($_POST['selectedName']) ? $_POST['selectedName'] : $selectedName); ?>"
+    data-url="update_chart_data.php?name=<?php echo urlencode(isset($_POST['selectedNamemin']) ? $_POST['selectedNamemin'] : $selectedNamemin); ?>"
 
     </div>
 </div>
@@ -85,3 +84,4 @@ echo '</pre>';
 <script src="script.js"></script>
 </body>
 </html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>

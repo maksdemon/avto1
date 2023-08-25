@@ -50,7 +50,7 @@ echo '</pre>';
         </nav>
         <h3 class="text-muted">Project name
             <form id="selectForm" method="post">
-                <select name="selectedNamemin" id="selectedNamemin">
+                <select name="selectedNamemin" id="selectedNamemin"  style="width: 800px;">
                     <?php while ($result = mysqli_fetch_assoc($sql)) : ?>
                         <option value="<?php echo $result['name']; ?>" <?php if ($_SESSION['selectedNamemin'] === $result['name']) echo 'selected'; ?>>
                             <?php echo $result['name'] . ' - ' . $result['category']; ?>

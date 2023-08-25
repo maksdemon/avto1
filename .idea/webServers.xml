@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="ce62c00e-5661-427a-a15d-e26588396db8" name="avto3" url="http://localhost">
+        <fileTransfer mountedRoot="H:\education-n-s\os2023\OSPanel\domains\avt" accessType="MOUNT" port="0" />
+      </webServer>
+    </option>
+  </component>
+</project>

@@ -1,6 +1,10 @@
 <?php
 require('config/config.php');
 require('template/odd.php');
+
+if (isset($_POST['selectedNamemin'])) {
+    $_SESSION['selectedNamemin'] = $_POST['selectedNamemin'];
+}
 /*echo'<pre>';
 print_r($result3);
 echo '</pre>';
@@ -14,7 +18,7 @@ echo '</pre>';
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
-
+    <link rel="stylesheet" href="style.css">
     <title>Narrow Jumbotron Template for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
@@ -42,6 +46,20 @@ echo '</pre>';
                 </li>
             </ul>
         </nav>
+        <table class="iksweb">
+            <tbody>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
         <h3 class="text-muted">Project name
             <form id="selectForm" method="post">
                 <select name="selectedNamemin" id="selectedNamemin"  style="width: 800px;">

@@ -1,12 +1,6 @@
 <?php
-session_start();
-
-if (isset($_POST['selectedNamemin'])) {
-    $_SESSION['selectedNamemin'] = $_POST['selectedNamemin'];
-}
 require('config/config.php');
 require('template/odd.php');
-
 /*echo'<pre>';
 print_r($result3);
 echo '</pre>';
@@ -91,7 +85,7 @@ echo '</pre>';
     </div>
     data-url="update_chart_data.php?name=<?php echo urlencode(isset($_POST['selectedNamemin']) ? $_POST['selectedNamemin'] : $selectedNamemin); ?>"
 
-    </div>
+</div>
 </div>
 <footer class="footer">
     <p>© Company 2017</p>

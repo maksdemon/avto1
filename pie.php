@@ -20,6 +20,7 @@ SELECT
     t.max_price,
     (SELECT date FROM avto1 WHERE name = t.name AND price = t.max_price LIMIT 1) AS max_date,
     t.avg_price,
+    (SELECT price FROM avto1 WHERE name = t.name ORDER BY date DESC LIMIT 1 OFFSET 1) AS prev_price,
     (SELECT price FROM avto1 WHERE name = t.name ORDER BY date DESC LIMIT 1) AS current_price
 FROM (
     SELECT
@@ -30,18 +31,19 @@ FROM (
         AVG(price) AS avg_price
     FROM avto1
     GROUP BY name, category
-    LIMIT 5
-) AS t;
+) AS t
+ORDER BY ABS(current_price - min_price);
 
 ";
 $resultStartDate = mysqli_query($mysqli, $sqlStartDate);
 $rowsStartDate = mysqli_fetch_all($resultStartDate, MYSQLI_ASSOC);
 
-
+$columnNames = array_keys($rowsStartDate[0]);
+/*
 echo'<pre>';
-print_r($rowsStartDate);
+print_r($columnNames);
 echo '</pre>';
-
+*/
 
 
 ?>
@@ -83,25 +85,14 @@ echo '</pre>';
         </nav>
 
         <h3 class="text-muted">Project name
-            <form id="selectForm" method="post">
-                <select name="selectedNamemin" id="selectedNamemin"  style="width: 800px;">
-                    <?php while ($result = mysqli_fetch_assoc($sql)) : ?>
-                        <option value="<?php echo $result['name']; ?>" <?php if ($_SESSION['selectedNamemin'] === $result['name']) echo 'selected'; ?>>
-                            <?php echo $result['name'] . ' - ' . $result['category']; ?>
 
-                        </option>
-                        <?php $count++; ?>
-                    <?php endwhile; ?>
-                </select>
-                <p>Выберите дату начиная с: <?php echo $start_date; ?></p>
-                <button type="submit" name="updateButton">Обновить график</button>
-            </form>
 
         </h3>
 
 
 
-        <table class="iksweb">    <tr>
+        <table class="iksweb">
+            <tr>
                 <th>Name</th>
                 <th>Category</th>
                 <th>Min Price</th>
@@ -109,13 +100,20 @@ echo '</pre>';
                 <th>Max Price</th>
                 <th>Max Date</th>
                 <th>Avg Price</th>
+                <th>Prev Price</th>
                 <th>Current Price</th>
             </tr>
-            <?php foreach ($rowsStartDate as $items): ?>
+            <?php foreach ($rowsStartDate as $row): ?>
                 <tr>
-                    <?php foreach ($items as $row): ?>
-                        <td><?php echo $row; ?></td>
-                    <?php endforeach; ?>
+                    <td><?php echo $row['name']; ?></td>
+                    <td><?php echo $row['category']; ?></td>
+                    <td><?php echo $row['min_price']; ?></td>
+                    <td><?php echo $row['min_date']; ?></td>
+                    <td><?php echo $row['max_price']; ?></td>
+                    <td><?php echo $row['max_date']; ?></td>
+                    <td><?php echo $row['avg_price']; ?></td>
+                    <td class="<?php echo ($row['current_price'] < $row['prev_price']) ? 'less-than-prev' : ''; ?>"><?php echo $row['prev_price']; ?></td>
+                    <td class="<?php echo ($row['current_price'] < $row['avg_price']) ? 'current-price' : ''; ?>"><?php echo $row['current_price']; ?></td>
                 </tr>
             <?php endforeach; ?>
         </table>

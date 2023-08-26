@@ -9,6 +9,41 @@ if (isset($_POST['selectedNamemin'])) {
 print_r($result3);
 echo '</pre>';
 */
+//для даты min and max and avg
+$sqlStartDate = "
+
+SELECT
+    t.name,
+    t.category,
+    t.min_price,
+    (SELECT date FROM avto1 WHERE name = t.name AND price = t.min_price LIMIT 1) AS min_date,
+    t.max_price,
+    (SELECT date FROM avto1 WHERE name = t.name AND price = t.max_price LIMIT 1) AS max_date,
+    t.avg_price,
+    (SELECT price FROM avto1 WHERE name = t.name ORDER BY date DESC LIMIT 1) AS current_price
+FROM (
+    SELECT
+        name,
+        category,
+        MIN(price) AS min_price,
+        MAX(price) AS max_price,
+        AVG(price) AS avg_price
+    FROM avto1
+    GROUP BY name, category
+    LIMIT 5
+) AS t;
+
+";
+$resultStartDate = mysqli_query($mysqli, $sqlStartDate);
+$rowsStartDate = mysqli_fetch_all($resultStartDate, MYSQLI_ASSOC);
+
+
+echo'<pre>';
+print_r($rowsStartDate);
+echo '</pre>';
+
+
+
 ?>
 <!DOCTYPE html>
 
@@ -46,20 +81,7 @@ echo '</pre>';
                 </li>
             </ul>
         </nav>
-        <table class="iksweb">
-            <tbody>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            </tbody>
-        </table>
+
         <h3 class="text-muted">Project name
             <form id="selectForm" method="post">
                 <select name="selectedNamemin" id="selectedNamemin"  style="width: 800px;">
@@ -76,6 +98,34 @@ echo '</pre>';
             </form>
 
         </h3>
+
+
+
+        <table class="iksweb">    <tr>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Min Price</th>
+                <th>Min Date</th>
+                <th>Max Price</th>
+                <th>Max Date</th>
+                <th>Avg Price</th>
+                <th>Current Price</th>
+            </tr>
+            <?php foreach ($rowsStartDate as $items): ?>
+                <tr>
+                    <?php foreach ($items as $row): ?>
+                        <td><?php echo $row; ?></td>
+                    <?php endforeach; ?>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+
+
+
+
+
+
+
         <div class="date-picker">
             <label for="start-date">Начальная дата:</label>
             <input type="date" id="start-date" name="start-date">
@@ -95,12 +145,7 @@ echo '</pre>';
         </div>
 
     </div>
-    <div class="container">
-        <canvas id="myChart4" width="600" height="400"
-                data-min-prices="<?php echo htmlspecialchars(json_encode(array_column($result4, 'min_price')), ENT_QUOTES, 'UTF-8'); ?>"
-                data-start-dates="<?php echo htmlspecialchars(json_encode(array_column($result4, 'start_date')), ENT_QUOTES, 'UTF-8'); ?>">
-        </canvas>
-    </div>
+
     data-url="update_chart_data.php?name=<?php echo urlencode(isset($_POST['selectedNamemin']) ? $_POST['selectedNamemin'] : $selectedNamemin); ?>"
 
 </div>

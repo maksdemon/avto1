@@ -27,7 +27,7 @@ if ($mysqli->connect_error) {
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="template/style.css">
     <title>Narrow Jumbotron Template for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
@@ -53,6 +53,9 @@ if ($mysqli->connect_error) {
             <li class="nav-item">
               <a class="nav-link" href="\min.php">min</a>
             </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="\add.php">min</a>
+              </li>
           </ul>
         </nav>
           <h3 class="text-muted">Project name

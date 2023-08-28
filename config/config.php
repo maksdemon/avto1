@@ -7,7 +7,7 @@ $mysqli = new mysqli('62.109.2.72', 'avtoparser', '7xXD2rN9i', 'avto1');
 if ($mysqli->connect_error) {
     echo 'Failed to connect to MySQL: ' . $mysqli->connect_error;
 } else {
-    echo 'Connection established';
+    echo 'Connection established1';
 }
 //для даты min
 $sqlStartDate = "SELECT MIN(date) AS start_date FROM avto1";

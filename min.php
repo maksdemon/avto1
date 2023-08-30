@@ -26,18 +26,23 @@ echo '</pre>';
         <?php include 'template/head_menu.php'; ?>
         <h3 class="text-muted">Project name
             <form id="selectForm" method="post">
-                <select name="selectedNamemin" id="selectedNamemin"  style="width: 800px;">
+                <input type="text" name="searchTerm" placeholder="Введите название для поиска" style="width: 300px;">
+                <select name="selectedNamemin" id="selectedNamemin" style="width: 800px;">
                     <?php while ($result = mysqli_fetch_assoc($sql)) : ?>
-                        <option value="<?php echo $result['name']; ?>" <?php if ($_SESSION['selectedNamemin'] === $result['name']) echo 'selected'; ?>>
-                            <?php echo $result['name'] . ' - ' . $result['category']; ?>
-
-                        </option>
-                        <?php $count++; ?>
+                        <?php
+                        // Если задан поисковый запрос и название содержит его, то выводим опцию списка
+                        if (empty($_POST['searchTerm']) || stripos($result['name'], $_POST['searchTerm']) !== false) :
+                            ?>
+                            <option value="<?php echo $result['name']; ?>" <?php if ($_SESSION['selectedNamemin'] === $result['name']) echo 'selected'; ?>>
+                                <?php echo $result['name'] . ' - ' . $result['category']; ?>
+                            </option>
+                        <?php endif; ?>
                     <?php endwhile; ?>
                 </select>
                 <p>Выберите дату начиная с: <?php echo $start_date; ?></p>
                 <button type="submit" name="updateButton">Обновить график</button>
             </form>
+
 
         </h3>
         <div class="date-picker">

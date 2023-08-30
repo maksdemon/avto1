@@ -2,6 +2,7 @@
 
 
 
+
 $mysqli = new mysqli('62.109.2.72', 'avtoparser', '7xXD2rN9i', 'avto1');
 
 if ($mysqli->connect_error) {
@@ -9,6 +10,28 @@ if ($mysqli->connect_error) {
 } else {
     echo 'Connection established1';
 }
+
+
+
+
+//последняя дата для иконки
+$sqllastdate="SELECT DATE FROM avto1 ORDER BY DATE DESC LIMIT 1";
+$resultlastdate = mysqli_query($mysqli, $sqllastdate);
+$rowlastdate = mysqli_fetch_row($resultlastdate);
+$currentDate = new DateTime();
+$lastDate = new DateTime($rowlastdate[0]);
+$interval = $currentDate->diff($lastDate);
+
+if ($interval->h < 10) {
+    $isLessThan10Hours = 'true';
+} else {
+    $isLessThan10Hours = 'false';
+}
+
+echo $isLessThan10Hours; // Выводит true или false
+
+
+
 //для даты min
 $sqlStartDate = "SELECT MIN(date) AS start_date FROM avto1";
 $resultStartDate = mysqli_query($mysqli, $sqlStartDate);

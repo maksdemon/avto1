@@ -1,7 +1,7 @@
 <?php
 $mysqli = new mysqli('62.109.2.72', 'avtoparser', '7xXD2rN9i', 'avto1');
 
-$sqloll = "SELECT * from avto1 LIMIT 5";
+$sqloll = "SELECT MIN(price),MAX(price),name,category,id,art from avto1 WHERE name= 'BOSCH 3397007620'";
 $resultStartDate = mysqli_query($mysqli, $sqloll);
 $rowStartDate = mysqli_fetch_all($resultStartDate, MYSQLI_ASSOC);
 

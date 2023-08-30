@@ -6,12 +6,15 @@ if (isset($_POST['selectedNamemin'])) {
 }
 require('config/config.php');
 require('template/odd.php');
-
-/*echo'<pre>';
-print_r($result3);
+/*
+echo'<pre>';
+print_r($rowlastdate[0]);
 echo '</pre>';
 */
+
+
 ?>
+
 <!DOCTYPE html>
 
 <?php include 'template/header.php'; ?>

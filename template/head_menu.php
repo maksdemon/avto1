@@ -12,5 +12,11 @@
               <li class="nav-item">
                   <a class="nav-link" href="\add.php">add</a>
               </li>
+              <li class="nav-item">
+                  <span class="<?php echo ($isLessThan10Hours) ? 'green-circle' : 'red-circle'; ?>"></span>
+                  <?php echo $rowlastdate[0]; ?> <!-- Вывод значения рядом с кругом -->
+                  <br><br>
+              </li>
           </ul>
         </nav>
+

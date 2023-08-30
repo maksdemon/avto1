@@ -35,3 +35,22 @@ table.iksweb td.min-price {
 table.iksweb td.less-than-prev {
     font-weight: bold;
 }
+.green-circle {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: green;
+
+}
+.red-circle {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: red;
+
+}
+li:last-child {
+   padding-top: 5px;
+}

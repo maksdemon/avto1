@@ -66,7 +66,8 @@ echo '</pre>';
 
 
 
-        <table id="example" class="iksweb"data-start="1" data-length="10">
+        <table id="example" class="iksweb" data-page-length="50">
+            <thead>
             <tr>
                 <th>Name</th>
                 <th>Category</th>
@@ -78,6 +79,8 @@ echo '</pre>';
                 <th>Prev Price</th>
                 <th>Current Price</th>
             </tr>
+            </thead>
+            <tbody>
             <?php foreach ($rowsStartDate as $row): ?>
                 <tr>
                     <td><?php echo $row['name']; ?></td>
@@ -88,9 +91,10 @@ echo '</pre>';
                     <td><?php echo $row['max_date']; ?></td>
                     <td><?php echo $row['avg_price']; ?></td>
                     <td class="<?php echo ($row['current_price'] < $row['prev_price']) ? 'less-than-prev' : ''; ?>"><?php echo $row['prev_price']; ?></td>
-                    <td class="<?php echo ($row['current_price'] < $row['avg_price']) ? 'current-price' : ''; ?>"><?php echo $row['current_price']; ?></td>
+                    <td class="<?php echo ($row['current_price'] <= $row['min_price']) ? 'min-price' : (($row['current_price'] < $row['avg_price']) ? 'current-price' : ''); ?>"><?php echo $row['current_price']; ?></td>
                 </tr>
             <?php endforeach; ?>
+            </tbody>
         </table>
 
 
@@ -100,7 +104,25 @@ echo '</pre>';
 
 
 
+        <div class="date-picker">
+            <label for="start-date">Начальная дата:</label>
+            <input type="date" id="start-date" name="start-date">
 
+            <label for="end-date">Конечная дата:</label>
+            <input type="date" id="end-date" name="end-date">
+
+            <button id="apply-date-range">Применить</button>
+        </div>
+    </div>
+
+
+    <div class="row marketing">
+
+        <div id="selectedData">
+            <!-- Сюда будут добавляться данные выбранного элемента -->
+        </div>
+
+    </div>
 
 
 
@@ -111,13 +133,19 @@ echo '</pre>';
 </footer>
 
 
-
-
+<script src="script.js"></script>
 </body>
 </html>
 <script>
     $(document).ready( function () {
-        $('#example').DataTable();
+        $('#example').DataTable(
+            {
+                language: {
+                    search: 'Найти:',
+                    searchPlaceholder: "Ведите для поиска"
+                }
+            }
+        );
     });
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>

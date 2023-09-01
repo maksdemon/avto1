@@ -50,7 +50,9 @@ echo '</pre>';
 <!DOCTYPE html>
 
 <?php include 'template/header.php'; ?>
-
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 <body>
 
 <div class="container">
@@ -64,7 +66,7 @@ echo '</pre>';
 
 
 
-        <table class="iksweb">
+        <table id="example" class="iksweb"data-start="1" data-length="10">
             <tr>
                 <th>Name</th>
                 <th>Category</th>
@@ -97,27 +99,10 @@ echo '</pre>';
 
 
 
-        <div class="date-picker">
-            <label for="start-date">Начальная дата:</label>
-            <input type="date" id="start-date" name="start-date">
-
-            <label for="end-date">Конечная дата:</label>
-            <input type="date" id="end-date" name="end-date">
-
-            <button id="apply-date-range">Применить</button>
-        </div>
-    </div>
 
 
-    <div class="row marketing">
 
-        <div id="selectedData">
-            <!-- Сюда будут добавляться данные выбранного элемента -->
-        </div>
 
-    </div>
-
-    data-url="update_chart_data.php?name=<?php echo urlencode(isset($_POST['selectedNamemin']) ? $_POST['selectedNamemin'] : $selectedNamemin); ?>"
 
 </div>
 </div>
@@ -125,10 +110,14 @@ echo '</pre>';
     <p>© Company 2017</p>
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
 
-<script src="script.js"></script>
+
+
 </body>
 </html>
+<script>
+    $(document).ready( function () {
+        $('#example').DataTable();
+    });
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>

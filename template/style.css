@@ -54,15 +54,55 @@ table.iksweb td.less-than-prev {
 li:last-child {
    padding-top: 5px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+/* Стили для попапа */
 .popup-container {
     display: none;
-    position: absolute;
-    background-color: white;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-    z-index: 1;
-    /* Другие стили по вашему выбору */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    text-align: center;
 }
 
 .popup-content {
-    /* Стили для содержимого попапа */
+    background-color: white;
+    max-width: 400px;
+    margin: 20px auto; /* Расположение по центру экрана */
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.popup-content h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.popup-content p {
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.popup-close {
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 18px;
+    color: red; /* Красный цвет текста */
 }

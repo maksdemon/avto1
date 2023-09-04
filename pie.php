@@ -54,7 +54,8 @@ echo '</pre>';
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-<script src="popup.js"></script>
+
+<script src="template/style.css"></script>
 <body>
 
 <div class="container">
@@ -88,7 +89,7 @@ echo '</pre>';
                 <tr>
                     <td><?php echo $row['name']; ?></td>
                     <td>
-                        <a class="popup-link" href="#" data-name="<?php echo $row['name']; ?>">icon</a>
+                        <a class="popup-link" href="javascript:void(0);" data-name="VAG G001770A2 Присадка для бензина для л/а металличес">icon</a>
                     </td>
                     <td><?php echo $row['category']; ?></td>
                     <td><?php echo $row['min_price']; ?></td>
@@ -141,7 +142,7 @@ echo '</pre>';
 </footer>
 
 
-<script src="script.js"></script>
+
 </body>
 </html>
 <script>
@@ -156,4 +157,5 @@ echo '</pre>';
         );
     });
 </script>
+<script src="popup.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>

@@ -2,6 +2,7 @@
 require('config/config.php');
 require('template/odd.php');
 
+
 if (isset($_POST['selectedNamemin'])) {
     $_SESSION['selectedNamemin'] = $_POST['selectedNamemin'];
 }
@@ -53,6 +54,7 @@ echo '</pre>';
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="popup.js"></script>
 <body>
 
 <div class="container">
@@ -70,6 +72,7 @@ echo '</pre>';
             <thead>
             <tr>
                 <th>Name</th>
+                <th>icon</th>
                 <th>Category</th>
                 <th>Min Price</th>
                 <th>Min Date</th>
@@ -84,6 +87,9 @@ echo '</pre>';
             <?php foreach ($rowsStartDate as $row): ?>
                 <tr>
                     <td><?php echo $row['name']; ?></td>
+                    <td>
+                        <a class="popup-link" href="#" data-name="<?php echo $row['name']; ?>">icon</a>
+                    </td>
                     <td><?php echo $row['category']; ?></td>
                     <td><?php echo $row['min_price']; ?></td>
                     <td><?php echo $row['min_date']; ?></td>
@@ -123,7 +129,9 @@ echo '</pre>';
         </div>
 
     </div>
-
+    <div class="popup-container" style="display: none;">
+        <!-- Ваш график должен быть вставлен здесь -->
+    </div>
 
 
 </div>

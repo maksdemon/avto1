@@ -89,7 +89,7 @@ echo '</pre>';
                 <tr>
                     <td><?php echo $row['name']; ?></td>
                     <td>
-                        <a class="popup-link" href="javascript:void(0);" data-name="VAG G001770A2 Присадка для бензина для л/а металличес">icon</a>
+                        <a class="popup-link" href="javascript:void(0);" data-name="<?php echo $row['name']; ?>" >icon</a>
                     </td>
                     <td><?php echo $row['category']; ?></td>
                     <td><?php echo $row['min_price']; ?></td>

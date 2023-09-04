@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
             // Кнопка закрытия попапа
             const closeButton = document.createElement("span");
             closeButton.classList.add("popup-close");
-            closeButton.textContent = "Закрыть";
+            closeButton.innerHTML = "&#10006;"; // Используем символ "✖"
             closeButton.style.color = "red"; // Красный цвет текста
             closeButton.style.cursor = "pointer";
             closeButton.style.position = "absolute";
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
             closeButton.style.right = "10px";
             closeButton.style.fontSize = "18px";
             closeButton.addEventListener("click", function () {
-                // Скрываем попап при клике на кнопку "Закрыть"
+                // Скрываем попап при клике на крестик
                 popupContainer.style.display = "none";
             });
             popupContent.appendChild(closeButton);
@@ -50,6 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
 
 /*
 

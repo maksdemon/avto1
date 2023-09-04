@@ -1,11 +1,7 @@
 <?php
 require('config/config.php');
-require('template/odd.php');
+echo '<script>const productName = ' . json_encode($productName) . ';</script>';
 
-
-if (isset($_POST['selectedNamemin'])) {
-    $_SESSION['selectedNamemin'] = $_POST['selectedNamemin'];
-}
 /*echo'<pre>';
 print_r($result3);
 echo '</pre>';

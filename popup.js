@@ -5,112 +5,104 @@ document.addEventListener("DOMContentLoaded", function () {
         link.addEventListener("click", function (e) {
             e.preventDefault();
             const productName = link.getAttribute("data-name");
-            const avgPrices = JSON.parse(link.getAttribute("data-avgprices"));
 
-            // Создание попап-контейнера и контента
-            const popupContainer = document.createElement("div");
-            popupContainer.classList.add("popup-container", "larger-popup"); // Добавляем класс для увеличенного размера
+            // Выполняем запрос к вашему PHP-скрипту
+            fetch(`http://avto1/your_php_script.php?product=${encodeURIComponent(productName)}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Создаем попап-контейнер и контент (попап-окно)
+                    const popupContainer = document.createElement("div");
+                    popupContainer.classList.add("popup-container");
 
-            const popupContent = document.createElement("div");
-            popupContent.classList.add("popup-content");
+                    const popupContent = document.createElement("div");
+                    popupContent.classList.add("popup-content");
 
-            // Заголовок попапа
-            const heading = document.createElement("h2");
-            heading.textContent = "Название товара:";
-            popupContent.appendChild(heading);
+                    // Добавляем заголовок с именем товара
+                    const heading = document.createElement("h2");
+                    heading.textContent = "Название товара: " + productName;
+                    popupContent.appendChild(heading);
 
-            // Название товара
-            const productNameElement = document.createElement("p");
-            productNameElement.textContent = productName;
-            productNameElement.style.color = "green"; // Зеленый цвет текста
-            productNameElement.style.fontWeight = "bold"; // Жирный шрифт
-            popupContent.appendChild(productNameElement);
+                    // Создаем элемент canvas для графика
+                    const popupChartCanvas = document.createElement("canvas");
+                    popupChartCanvas.id = "popupChart"; // Устанавливаем id для графика
 
-            // Кнопка закрытия попапа
-            const closeButton = document.createElement("span");
-            closeButton.classList.add("popup-close");
-            closeButton.innerHTML = "&#10006;"; // Используем символ "✖"
-            closeButton.style.color = "red"; // Красный цвет текста
-            closeButton.style.cursor = "pointer";
-            closeButton.style.position = "absolute";
-            closeButton.style.top = "10px";
-            closeButton.style.right = "10px";
-            closeButton.style.fontSize = "18px";
-            closeButton.addEventListener("click", function () {
-                // Скрываем попап при клике на крестик
-                popupContainer.style.display = "none";
-            });
-            popupContent.appendChild(closeButton);
+                    // Добавляем canvas в контент попапа
+                    popupContent.appendChild(popupChartCanvas);
 
-            // Создание элемента canvas для графика
-            const popupChartCanvas = document.createElement("canvas");
-            popupChartCanvas.id = "popupChart"; // Присваиваем id для графика
+                    // Добавляем контент в попап и попап в body
+                    popupContainer.appendChild(popupContent);
+                    document.body.appendChild(popupContainer);
 
-            // Добавляем canvas в контент попапа
-            popupContent.appendChild(popupChartCanvas);
+                    // Показываем попап
+                    popupContainer.style.display = "block";
 
-            // Добавление контента в попап и попап в body
-            popupContainer.appendChild(popupContent);
-            document.body.appendChild(popupContainer);
+                    // Создаем график внутри попапа
+                    var popupCanvas = document.getElementById('popupChart');
+                    if (popupCanvas) {
+                        var ctx = popupCanvas.getContext('2d');
 
-            // Показываем попап
-            popupContainer.style.display = "block";
+                        if (Array.isArray(data)) {
+                            // Если data - массив, создаем график на основе данных массива
 
-            // Создание графика внутри попапа
-            var popupCanvas = document.getElementById('popupChart');
-            if (popupCanvas) {
-                // Преобразование дат в массив объектов Date
-                const avgDates = avgPrices.map(function (priceData) {
-                    return new Date(priceData.date_day);
-                });
+                            if (data.length > 0) {
+                                const avgDates = data.map(function (priceData) {
+                                    return new Date(priceData.date_day);
+                                });
 
-                // Получаем только значения цен из объектов цен
-                const avgPricesValues = avgPrices.map(function (priceData) {
-                    return priceData.avg_price;
-                });
+                                const avgPricesValues = data.map(function (priceData) {
+                                    return parseFloat(priceData.avg_price);
+                                });
 
-                // Создание графика внутри попапа
-                var ctx = popupCanvas.getContext('2d');
-                var myPopupChart = new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: avgDates,
-                        datasets: [{
-                            label: 'Средняя цена',
-                            data: avgPricesValues,
-                            backgroundColor: 'rgba(75, 192, 192, 0.6)',
-                            borderColor: 'rgba(75, 192, 192, 1)',
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        legend: {
-                            display: false
-                        },
-                        title: {
-                            display: true,
-                            text: 'Средняя цена товара со временем',
-                            position: 'top',
-                            fontSize: 16,
-                            padding: 20
-                        },
-                        scales: {
-                            xAxes: [{
-                                type: 'time',
-                                time: {
-                                    unit: 'day'
-                                }
-                            }],
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero: true
-                                }
-                            }]
+                                var myPopupChart = new Chart(ctx, {
+                                    type: 'bar',
+                                    data: {
+                                        labels: avgDates,
+                                        datasets: [{
+                                            label: 'Средняя цена',
+                                            data: avgPricesValues,
+                                            backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                                            borderColor: 'rgba(75, 192, 192, 1)',
+                                            borderWidth: 1
+                                        }]
+                                    },
+                                    options: {
+                                        legend: {
+                                            display: false
+                                        },
+                                        title: {
+                                            display: true,
+                                            text: 'Средняя цена товара со временем',
+                                            position: 'top',
+                                            fontSize: 16,
+                                            padding: 20
+                                        },
+                                        scales: {
+                                            xAxes: [{
+                                                type: 'time',
+                                                time: {
+                                                    unit: 'day'
+                                                }
+                                            }],
+                                            yAxes: [{
+                                                ticks: {
+                                                    beginAtZero: true
+                                                }
+                                            }]
+                                        }
+                                    }
+                                });
+                            } else {
+                                console.error('data - пустой массив:', data);
+                            }
+                        } else {
+                            console.error('data не является массивом:', data);
                         }
                     }
+                })
+                .catch(error => {
+                    console.error('Ошибка при выполнении запроса:', error);
                 });
-            }
         });
     });
 });
-console.log(avgPrices);
+console.log("Product Name:", productName);

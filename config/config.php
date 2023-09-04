@@ -130,4 +130,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 
+
+if (isset($_GET['product'])) {
+    $productName = $_GET['product'];
+
+    // SQL-запрос для получения данных
+    $query = "SELECT
+                DATE(date) AS date_day,
+                AVG(price) AS avg_price
+            FROM avto1
+            WHERE name = ?
+            GROUP BY DATE(date)";
+
+    if ($stmt = $mysqli->prepare($query)) {
+        $stmt->bind_param("s", $productName);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $resultArray = array();
+        while ($row = $result->fetch_assoc()) {
+            $resultArray[] = $row;
+        }
+
+        $stmt->close();
+
+        // Отправляем данные в формате JSON
+        header('Content-Type: application/json');
+        echo json_encode($resultArray);
+    } else {
+        echo "Error: " . $mysqli->error;
+    }
+}
+
+// Закрываем соединение с базой данных
+
+
 ?>

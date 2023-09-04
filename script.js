@@ -40,7 +40,10 @@ if (canvas3) {
                 xAxes: [{
                     type: 'time',
                     time: {
-                        unit: 'day'
+                        unit: 'day', // Устанавливаем единицу времени на день
+                        displayFormats: {
+                            day: 'DD MMM YYYY' // Устанавливаем формат отображения даты
+                        }
                     }
                 }],
                 yAxes: [{
@@ -90,8 +93,11 @@ var myChart4 = new Chart(ctx4, {
             xAxes: [{
                 type: 'time',
                 time: {
-                    unit: 'day'
+                unit: 'day', // Устанавливаем единицу времени на день
+                displayFormats: {
+                    day: 'DD MMM YYYY' // Устанавливаем формат отображения даты
                 }
+            }
             }],
             yAxes: [{
                 ticks: {

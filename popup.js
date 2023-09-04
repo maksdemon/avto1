@@ -17,6 +17,13 @@ document.addEventListener("DOMContentLoaded", function () {
                     const popupContent = document.createElement("div");
                     popupContent.classList.add("popup-content");
 
+                    // Добавляем кнопку закрытия
+                    const closeButton = document.createElement("button");
+                    closeButton.classList.add("popup-close-button");
+                    closeButton.setAttribute("aria-label", "Закрыть попап");
+                    closeButton.textContent = "×"; // Текст кнопки закрытия
+                    popupContent.appendChild(closeButton);
+
                     // Добавляем заголовок с именем товара
                     const heading = document.createElement("h2");
                     heading.textContent = "Название товара: " + productName;
@@ -80,7 +87,11 @@ document.addEventListener("DOMContentLoaded", function () {
                                             xAxes: [{
                                                 type: 'time',
                                                 time: {
-                                                    unit: 'day'
+                                                    unit: 'day', // Устанавливаем единицу времени на день
+                                                    tooltipFormat: 'DD MMM ',
+                                                    displayFormats: {
+                                                        day: 'DD MMM ' // Устанавливаем формат отображения даты
+                                                    }
                                                 }
                                             }],
                                             yAxes: [{
@@ -98,6 +109,10 @@ document.addEventListener("DOMContentLoaded", function () {
                             console.error('data не является массивом:', data);
                         }
                     }
+                    closeButton.addEventListener('click', function () {
+                        // Закрываем попап
+                        document.body.removeChild(popupContainer);
+                    });
                 })
                 .catch(error => {
                     console.error('Ошибка при выполнении запроса:', error);

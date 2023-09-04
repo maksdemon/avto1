@@ -105,7 +105,6 @@ echo '</pre>';
                     <td>
                         <a class="popup-link" href="javascript:void(0);" data-popup data-name="<?php echo $row['name']; ?>" data-avgprices="<?php echo htmlspecialchars(json_encode($row['avg_price']), ENT_QUOTES, 'UTF-8'); ?>">icon</a>
 
-
                     </td>
                     <td><?php echo $row['category']; ?></td>
                     <td><?php echo $row['min_price']; ?></td>
@@ -168,4 +167,4 @@ echo '</pre>';
 </script>
 <script src="script.js"></script>
 <script src="popup.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>

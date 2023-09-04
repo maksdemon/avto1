@@ -8,7 +8,7 @@ echo '</pre>';
 */
 //для даты min and max and avg
 $sqlStartDate = "
-SELECT
+SELECT 
     t.name,
     t.category,
     t.min_price,

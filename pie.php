@@ -157,5 +157,6 @@ echo '</pre>';
         );
     });
 </script>
+<script src="script.js"></script>
 <script src="popup.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>

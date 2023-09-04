@@ -81,7 +81,8 @@ li:last-child {
 
 .popup-content {
     background-color: white;
-    max-width: 400px;
+    max-width: 900px;
+    height:500px;
     margin: 20px auto; /* Расположение по центру экрана */
     padding: 20px;
     border-radius: 5px;

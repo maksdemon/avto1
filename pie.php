@@ -1,7 +1,7 @@
 <?php
 require('config/config.php');
 require('template/odd.php');
-
+require('popsql.php');
 
 if (isset($_POST['selectedNamemin'])) {
     $_SESSION['selectedNamemin'] = $_POST['selectedNamemin'];
@@ -12,7 +12,6 @@ echo '</pre>';
 */
 //для даты min and max and avg
 $sqlStartDate = "
-
 SELECT
     t.name,
     t.category,
@@ -38,15 +37,30 @@ ORDER BY ABS(current_price - min_price);
 ";
 $resultStartDate = mysqli_query($mysqli, $sqlStartDate);
 $rowsStartDate = mysqli_fetch_all($resultStartDate, MYSQLI_ASSOC);
-
 $columnNames = array_keys($rowsStartDate[0]);
+
+
+
+/*
+echo'<pre>';
+print_r($rowsStartpop);
+echo '</pre>';
+*/
+//$columnNames = array_keys($rowsStartDate[0]);
+
+
+
+
 /*
 echo'<pre>';
 print_r($columnNames);
 echo '</pre>';
 */
+//график для работы
 
 
+
+console.log(avgPrices);
 ?>
 <!DOCTYPE html>
 
@@ -56,6 +70,10 @@ echo '</pre>';
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
 <script src="template/style.css"></script>
+<script src="popsql.php"></script>
+
+
+
 <body>
 
 <div class="container">
@@ -86,10 +104,11 @@ echo '</pre>';
             </thead>
             <tbody>
             <?php foreach ($rowsStartDate as $row): ?>
+
                 <tr>
                     <td><?php echo $row['name']; ?></td>
                     <td>
-                        <a class="popup-link" href="javascript:void(0);" data-name="<?php echo $row['name']; ?>" >icon</a>
+                        <a class="popup-link" href="javascript:void(0);" data-popup data-name="<?php echo $row['name']; ?>" data-avgprices="<?php echo htmlspecialchars(json_encode($row['avg_price']), ENT_QUOTES, 'UTF-8'); ?>">icon</a>
                     </td>
                     <td><?php echo $row['category']; ?></td>
                     <td><?php echo $row['min_price']; ?></td>
@@ -103,13 +122,6 @@ echo '</pre>';
             <?php endforeach; ?>
             </tbody>
         </table>
-
-
-
-
-
-
-
 
         <div class="date-picker">
             <label for="start-date">Начальная дата:</label>

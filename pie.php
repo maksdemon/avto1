@@ -17,7 +17,8 @@ SELECT
     (SELECT date FROM avto1 WHERE name = t.name AND price = t.max_price LIMIT 1) AS max_date,
     t.avg_price,
     (SELECT price FROM avto1 WHERE name = t.name ORDER BY date DESC LIMIT 1 OFFSET 1) AS prev_price,
-    (SELECT price FROM avto1 WHERE name = t.name ORDER BY date DESC LIMIT 1) AS current_price
+    (SELECT price FROM avto1 WHERE name = t.name ORDER BY date DESC LIMIT 1) AS current_price,
+    (SELECT url FROM avto1 WHERE name = t.name ORDER BY date DESC LIMIT 1) AS last_url
 FROM (
     SELECT
         name,
@@ -88,6 +89,7 @@ echo '</pre>';
                 <th>Name</th>
                 <th>icon</th>
                 <th>Category</th>
+                <th>url</th>
                 <th>Min Price</th>
                 <th>Min Date</th>
                 <th>Max Price</th>
@@ -107,6 +109,7 @@ echo '</pre>';
 
                     </td>
                     <td><?php echo $row['category']; ?></td>
+                    <td><?php echo $row['last_url']; ?></td>
                     <td><?php echo $row['min_price']; ?></td>
                     <td><?php echo $row['min_date']; ?></td>
                     <td><?php echo $row['max_price']; ?></td>

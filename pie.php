@@ -1,4 +1,5 @@
 <?php
+
 require('config/config.php');
 
 
@@ -37,15 +38,12 @@ $rowsStartDate = mysqli_fetch_all($resultStartDate, MYSQLI_ASSOC);
 $columnNames = array_keys($rowsStartDate[0]);
 
 
-
 /*
 echo'<pre>';
 print_r($rowsStartpop);
 echo '</pre>';
 */
 //$columnNames = array_keys($rowsStartDate[0]);
-
-
 
 
 /*
@@ -56,11 +54,11 @@ echo '</pre>';
 //график для работы
 
 
-
 ?>
 <!DOCTYPE html>
 
-<?php include 'template/header.php'; ?>
+<?php
+include 'template/header.php'; ?>
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
@@ -68,19 +66,17 @@ echo '</pre>';
 <script src="template/style.css"></script>
 
 
-
-
 <body>
 
 <div class="container">
     <div class="header clearfix">
-        <?php include 'template/head_menu.php'; ?>
+        <?php
+        include 'template/head_menu.php'; ?>
 
         <h3 class="text-muted">Project name
 
 
         </h3>
-
 
 
         <table id="example" class="iksweb" data-page-length="50">
@@ -89,7 +85,6 @@ echo '</pre>';
                 <th>Name</th>
                 <th>icon</th>
                 <th>Category</th>
-                <th>url</th>
                 <th>Min Price</th>
                 <th>Min Date</th>
                 <th>Max Price</th>
@@ -100,25 +95,40 @@ echo '</pre>';
             </tr>
             </thead>
             <tbody>
-            <?php foreach ($rowsStartDate as $row): ?>
+            <?php
+            foreach ($rowsStartDate as $row): ?>
 
                 <tr>
-                    <td><?php echo $row['name']; ?></td>
+                    <td><a href="<?= $row['last_url']; ?>"><?php
+                            echo $row['name']; ?></a></td>
                     <td>
-                        <a class="popup-link" href="javascript:void(0);" data-popup data-name="<?php echo $row['name']; ?>" data-avgprices="<?php echo htmlspecialchars(json_encode($row['avg_price']), ENT_QUOTES, 'UTF-8'); ?>"><img src="img/img.png" alt="Иконка"></a>
+                        <a class="popup-link" href="javascript:void(0);" data-popup data-name="<?php
+                        echo $row['name']; ?>" data-avgprices="<?php
+                        echo htmlspecialchars(json_encode($row['avg_price']), ENT_QUOTES, 'UTF-8'); ?>"><img
+                                    src="img/img.png" alt="Иконка"></a>
 
                     </td>
-                    <td><?php echo $row['category']; ?></td>
-                    <td><?php echo $row['last_url']; ?></td>
-                    <td><?php echo $row['min_price']; ?></td>
-                    <td><?php echo $row['min_date']; ?></td>
-                    <td><?php echo $row['max_price']; ?></td>
-                    <td><?php echo $row['max_date']; ?></td>
-                    <td><?php echo $row['avg_price']; ?></td>
-                    <td class="<?php echo ($row['current_price'] < $row['prev_price']) ? 'less-than-prev' : ''; ?>"><?php echo $row['prev_price']; ?></td>
-                    <td class="<?php echo ($row['current_price'] <= $row['min_price']) ? 'min-price' : (($row['current_price'] < $row['avg_price']) ? 'current-price' : ''); ?>"><?php echo $row['current_price']; ?></td>
+                    <td><?php
+                        echo $row['category']; ?></td>
+                    <td><?php
+                        echo $row['min_price']; ?></td>
+                    <td><?php
+                        echo $row['min_date']; ?></td>
+                    <td><?php
+                        echo $row['max_price']; ?></td>
+                    <td><?php
+                        echo $row['max_date']; ?></td>
+                    <td><?php
+                        echo $row['avg_price']; ?></td>
+                    <td class="<?php
+                    echo ($row['current_price'] < $row['prev_price']) ? 'less-than-prev' : ''; ?>"><?php
+                        echo $row['prev_price']; ?></td>
+                    <td class="<?php
+                    echo ($row['current_price'] <= $row['min_price']) ? 'min-price' : (($row['current_price'] < $row['avg_price']) ? 'current-price' : ''); ?>"><?php
+                        echo $row['current_price']; ?></td>
                 </tr>
-            <?php endforeach; ?>
+            <?php
+            endforeach; ?>
             </tbody>
         </table>
 
@@ -153,11 +163,10 @@ echo '</pre>';
 </footer>
 
 
-
 </body>
 </html>
 <script>
-    $(document).ready( function () {
+    $(document).ready(function () {
         $('#example').DataTable(
             {
                 language: {

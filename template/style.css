@@ -35,6 +35,7 @@ table.iksweb td.min-price {
 table.iksweb td.less-than-prev {
     font-weight: bold;
 }
+
 .green-circle {
     display: inline-block;
     width: 10px;
@@ -43,6 +44,7 @@ table.iksweb td.less-than-prev {
     background-color: green;
 
 }
+
 .red-circle {
     display: inline-block;
     width: 10px;
@@ -51,19 +53,10 @@ table.iksweb td.less-than-prev {
     background-color: red;
 
 }
+
 li:last-child {
     padding-top: 5px;
 }
-
-
-
-
-
-
-
-
-
-
 
 
 /* Стили для попапа */
@@ -82,7 +75,7 @@ li:last-child {
 .popup-content {
     background-color: white;
     max-width: 900px;
-    height:500px;
+    height: 500px;
     margin: 20px auto; /* Расположение по центру экрана */
     padding: 20px;
     border-radius: 5px;
@@ -107,8 +100,6 @@ li:last-child {
     font-size: 18px;
     color: red; /* Красный цвет текста */
 }
-
-
 
 
 /* Стили для затемнения экрана */
@@ -152,4 +143,13 @@ li:last-child {
     margin: 0 auto;
     width: 20px;
     height: 20px;
+}
+
+.url1 {
+    padding-left: 29px;
+
+}
+
+.areas {
+    width: 390px;
 }

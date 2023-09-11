@@ -1,4 +1,3 @@
-
 <?php
 // Получаем значение name из GET-параметра
 $productName = $_GET['product'];

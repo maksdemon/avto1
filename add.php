@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 
@@ -49,12 +50,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     print_r($errors);
 }
 // Функция для обработки введенных данных
-function test_input($data) {
+function test_input($data)
+{
     $data = trim($data);
     $data = stripslashes($data);
     $data = htmlspecialchars($data);
     return $data;
 }
+
 //echo $insertQuery;
 
 /*echo'<pre>';
@@ -63,29 +66,34 @@ echo '</pre>';
 */
 ?>
 <!DOCTYPE html>
+<?php
+include 'template/header.php'; ?>
 
-<html>
-<head>
-    <title>Add URL and Notes</title>
-</head>
 <body>
+<div class="container">
+    <?php
+    include 'template/head_menu.php'; ?>
 
 
-
-
-<h2>Add URL and Notes</h2>
-<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-    <label for="url">URL:</label>
-    <input type="text" name="url" value="<?php echo $url; ?>">
-    <span class="error"><?php echo isset($errors["url"]) ? $errors["url"] : ""; ?></span>
-    <br><br>
-    <label for="notes">Notes:</label>
-    <textarea name="notes" rows="4" cols="50"><?php echo $notes; ?></textarea>
-    <br><br>
-    <input type="submit" name="submit" value="Submit">
-</form>
+    <h2>Add URL and Notes</h2>
+    <form method="post" action="<?php
+    echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+        <label class="url1" for="url">URL:</label>
+        <input class="areas" type="text" name="url" value="<?php
+        echo $url; ?>">
+        <span class="error"><?php
+            echo isset($errors["url"]) ? $errors["url"] : ""; ?></span>
+        <br><br>
+        <label for="notes">Заметка:</label>
+        <textarea name="notes" rows="4" cols="50"><?php
+            echo $notes; ?></textarea>
+        <br><br>
+        <input type="submit" name="submit" value="Добавить">
+    </form>
 
 </body>
+</div>
+
 </html>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>

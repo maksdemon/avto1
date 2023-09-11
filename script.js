@@ -1,4 +1,3 @@
-
 // Создаем контекст для третьего графика
 var canvas3 = document.getElementById('myChart3');
 if (canvas3) {
@@ -54,7 +53,8 @@ if (canvas3) {
             }
         }
     })
-};
+}
+;
 
 // Получаем данные для selectedNamemin из атрибутов data-*
 var canvas4 = document.getElementById('myChart4');
@@ -93,11 +93,11 @@ var myChart4 = new Chart(ctx4, {
             xAxes: [{
                 type: 'time',
                 time: {
-                unit: 'day', // Устанавливаем единицу времени на день
-                displayFormats: {
-                    day: 'DD MMM YYYY' // Устанавливаем формат отображения даты
+                    unit: 'day', // Устанавливаем единицу времени на день
+                    displayFormats: {
+                        day: 'DD MMM YYYY' // Устанавливаем формат отображения даты
+                    }
                 }
-            }
             }],
             yAxes: [{
                 ticks: {
@@ -114,7 +114,7 @@ var endDateInput = document.getElementById('end-date');
 var applyDateRangeButton = document.getElementById('apply-date-range');
 
 // Обработчик нажатия на кнопку "Применить"
-applyDateRangeButton.addEventListener('click', function() {
+applyDateRangeButton.addEventListener('click', function () {
     var startDate = new Date(startDateInput.value);
 
     // Если последняя дата выбрана, используем её; иначе, текущая дата

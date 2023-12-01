@@ -31,6 +31,15 @@
             echo $rowlastdate[0]; ?> <!-- Вывод значения рядом с кругом -->
             <br><br>
         </li>
+        <li class="nav-item">
+            <a class="nav-link <?php
+            if ($_SERVER['REQUEST_URI'] === '/auth.php') {
+                echo "active";
+            } ?> " href="\auth.php">auth</a>
+        </li>
+
+
+
     </ul>
 </nav>
 

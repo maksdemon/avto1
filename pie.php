@@ -99,7 +99,7 @@ include 'template/header.php'; ?>
             foreach ($rowsStartDate as $row): ?>
 
                 <tr>
-                    <td><a href="<?= $row['last_url']; ?>"><?php
+                    <td><a href="<?php echo $row['last_url']; ?>"><?php
                             echo $row['name']; ?></a></td>
                     <td>
                         <a class="popup-link" href="javascript:void(0);" data-popup data-name="<?php

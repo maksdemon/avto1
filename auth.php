@@ -4,7 +4,7 @@
 ?>
 <!DOCTYPE html>
 <?php
-include 'template/header.php'; ?>
+include 'template/header.php' ; ?>
 
 <body>
 <div class="container">

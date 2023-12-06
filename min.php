@@ -1,12 +1,13 @@
 <?php
 
-session_start();
+
 
 if (isset($_POST['selectedNamemin'])) {
     $_SESSION['selectedNamemin'] = $_POST['selectedNamemin'];
 }
 require('config/config.php');
 require('template/odd.php');
+require('template/session.php');
 /*
 echo'<pre>';
 print_r($rowlastdate[0]);

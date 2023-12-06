@@ -1,14 +1,10 @@
 <?php
 
-session_start();
-if (!isset($_SESSION['username'])) {
-    // Если сессия не существует, перенаправляем пользователя на страницу входа или выводим сообщение об ошибке
-    header("Location: auth.php"); // Замените "login.php" на страницу вашей авторизации
-    exit();
-}
+
 
 require('config/config.php');
 require('template/odd.php');
+require('template/session.php');
 // Переменные для хранения значений полей
 $url = $notes = "";
 $insertQuery = "";
@@ -39,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             //   echo $insertQuery;
             echo "URL успешно добавлен!";
             // echo($errors);
-
+            header("Location: pie.php");
             //echo($insertQuery);
         } else {
             // Ошибка при добавлении

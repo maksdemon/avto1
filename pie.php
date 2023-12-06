@@ -1,5 +1,5 @@
 <?php
-
+require('template/session.php');
 require('config/config.php');
 session_start();
 

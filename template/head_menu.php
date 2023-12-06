@@ -37,6 +37,15 @@
                 echo "active";
             } ?> " href="\auth.php">auth</a>
         </li>
+        <li class="nav-item">
+            <?php if(isset($_SESSION['username'])): ?>
+                <a class="nav-link" href="#"><?php echo $_SESSION['username']; ?></a>
+                <a class="nav-link" href="../logout.php">Выход</a>
+            <?php else: ?>
+                <a class="nav-link" href="#">Не авторизован</a>
+            <?php endif; ?>
+        </li>
+
 
 
 

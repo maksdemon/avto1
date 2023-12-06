@@ -1,4 +1,10 @@
 <?php
+// Начать сессию
+
+session_start();
+
+// Установить значение переменной сессии
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["fname"]) && isset($_POST["pas"])) {
         $fname = $_POST["fname"];
@@ -32,6 +38,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if (password_verify($password, $hashed_password)) {
 
                     $_SESSION['username'] = $fname;
+                    if (isset($_SESSION['username'])) {
+                        $username = $_SESSION['username'];
+                        echo "Имя пользователя: $username";
+                    } else {
+                        echo "Сессия не содержит имени пользователя";
+                    }
+
+
                     echo "Вы успешно авторизованы!";
                     // Редирект на другую страницу или выполнение других действий после успешной авторизации
                 } else {
